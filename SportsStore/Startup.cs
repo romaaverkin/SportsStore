@@ -18,7 +18,7 @@ namespace SportsStore
         {
             // Создать службу хранилища, которая позволит контроллерам получать реализующие
             // интерфейс IProductRepository объекты, не зная, какой класс применяется.
-                        services.AddTransient<IProductRepository, FakeProductRepository>();
+            services.AddTransient<IProductRepository, FakeProductRepository>();
             services.AddMvc();
         }
 
@@ -47,6 +47,10 @@ namespace SportsStore
             // (которая позже в процессе разработки будет изменена)
             app.UseMvc(routes =>
             {
+                // Установка стандартного маршрута
+                routes.MapRoute(
+                    name: "default",
+                    template: "{controller=Product}/{action=List}/{id?}");
             });
         }
     }
